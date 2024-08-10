@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/components/card.dart';
+import 'card.dart';
 
 class FlotingButton extends StatefulWidget {
   const FlotingButton({super.key});

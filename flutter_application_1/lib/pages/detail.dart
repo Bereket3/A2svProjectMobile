@@ -19,7 +19,7 @@ class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     dynamic obj = ModalRoute.of(context)?.settings.arguments;
-    dynamic product = obj["data"];
+    dynamic product = obj['data'];
     
     return Scaffold(
       backgroundColor: Colors.white,
@@ -85,7 +85,7 @@ class _DetailState extends State<Detail> {
                             color: Color.fromARGB(255, 250, 227, 18),
                           ),
                           Text(
-                            " (4.0)",
+                            ' (4.0)',
                             style: TextStyle(
                             fontWeight: FontWeight.w300,
                             color: Color.fromARGB(255, 171, 171, 171),
@@ -111,7 +111,7 @@ class _DetailState extends State<Detail> {
                       ),
                       //SizedBox(width: 60,),
                       Text(
-                        "\$${product.price}",
+                        '\$${product.price}',
                         style:const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
@@ -121,7 +121,7 @@ class _DetailState extends State<Detail> {
                   ),
                   const SizedBox(height: 20,),
                   const Text(
-                    "Size:",
+                    'Size:',
                     style: TextStyle(
                       fontSize: 23,
                       //color: Color.fromARGB(255, 88, 87, 87),
@@ -182,7 +182,7 @@ class _DetailState extends State<Detail> {
                         onPressed: () => {
                           Navigator.pop(context, 
                             {
-                              "type":"delete",
+                              'type':'delete',
                             }
                           ),
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -206,7 +206,7 @@ class _DetailState extends State<Detail> {
                             fixedSize : const Size.fromHeight(50,), // Button width and height
                         ),
                         child: const Text(
-                          "        DELETE        ",
+                          '        DELETE        ',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.red
@@ -220,8 +220,8 @@ class _DetailState extends State<Detail> {
                           if(result != null) {
                             // ignore: use_build_context_synchronously
                             Navigator.pop(context, {
-                              "type": "update",
-                              "data": result
+                              'type': 'update',
+                              'data': result
                             });
                           }
                         },
@@ -234,7 +234,7 @@ class _DetailState extends State<Detail> {
                             fixedSize:const Size.fromHeight(50), // Button width and height
                         ),
                         child: const Text(
-                          "        UPDATE        ",
+                          '        UPDATE        ',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.white
