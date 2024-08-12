@@ -7,8 +7,8 @@ import 'dart:async' as _i4;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:ecommerc_app/core/error/failure.dart' as _i5;
-import 'package:ecommerc_app/domain/entities/product.dart' as _i6;
-import 'package:ecommerc_app/domain/repositories/product_repositories.dart'
+import 'package:ecommerc_app/features/product/domain/entities/product.dart' as _i6;
+import 'package:ecommerc_app/features/product/domain/repositories/product_repositories.dart'
     as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 
