@@ -11,3 +11,11 @@ abstract class Failure extends Equatable {
 class ServerFailure extends Failure {
   const ServerFailure(String message) : super(message);
 }
+
+class CacheFailure extends Failure {
+  const CacheFailure(super.message);
+}
+
+class NoConnection extends Failure {
+  const NoConnection(super.message);
+}
