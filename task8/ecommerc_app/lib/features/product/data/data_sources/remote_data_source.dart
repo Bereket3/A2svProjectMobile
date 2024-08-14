@@ -9,10 +9,10 @@ import '../models/product_model.dart';
 
 abstract class ProductRemoteDataSource {
   
-  Future<ProductModel> getCurrentProduct(int id);
+  Future<ProductModel> getCurrentProduct(String id);
   Future<List<ProductModel>> getProduct();
   Future<ProductModel> updateProduct(ProductModel product);
-  Future deleteProduct(int id);
+  Future deleteProduct(String id);
   Future createProduct(ProductModel product);
 
 }
@@ -22,7 +22,12 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   ProductRemoteDataSourceImpl({required this.client});
   
    @override
-  Future < ProductModel > getCurrentProduct(int id) async {
+  Future < ProductModel > getCurrentProduct(dynamic id) async {
+    try {
+    id = id.toString();
+    } catch (e) {
+      throw new Error();
+    }
     final response = await client.get(Uri.parse(Urls.getProductId(id)));
 
      if (response.statusCode == 200) {
@@ -60,7 +65,12 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   }
   
   @override
-  Future deleteProduct(int id) async {
+  Future deleteProduct(dynamic id) async {
+    try {
+    id = id.toString();
+    } catch (e) {
+      throw new Error();
+    }
     final response = await client.delete(Uri.parse(Urls.deleteProductId(id)));
 
     if (response.statusCode == 200) {

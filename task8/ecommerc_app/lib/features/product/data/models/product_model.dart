@@ -15,7 +15,7 @@ extension ProductMapper on ProductEntity {
 
 class ProductModel extends ProductEntity {
   const ProductModel({
-      required int id,
+      required String id,
       required String name,
       required String description,
       required int price,

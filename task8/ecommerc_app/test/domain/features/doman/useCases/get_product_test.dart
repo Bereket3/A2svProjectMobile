@@ -21,14 +21,14 @@ void main() {
   });
 
   final testProduct = const ProductEntity(
-    id: 1,
+    id:  '66bc7fd34a74f6cc9351de67',
     name: 'Test Product',
     description: 'This is a test product',
     price: 100,
     imageUrl: 'http://test.com/product.jpg',
   );
 
-  const testProductId = 1;
+  const testProductId =  '66bc7fd34a74f6cc9351de67';
 
   test('should get product for the name from the repository', () async {
     // Arrange
@@ -59,7 +59,7 @@ void main() {
   });
 
   final updatedProduct = const ProductEntity(
-    id: 1,
+    id: '66bc7fd34a74f6cc9351de67',
     name: 'Updated Product',
     description: 'This is an updated test product',
     price: 150,

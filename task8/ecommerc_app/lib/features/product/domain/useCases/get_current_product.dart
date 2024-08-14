@@ -9,7 +9,7 @@ class GetCurrentProductUseCase {
 
   GetCurrentProductUseCase(this.productRepository); 
   
-  Future<Either<Failure, ProductEntity>> execute(int id) {
+  Future<Either<Failure, ProductEntity>> execute(String id) {
     return productRepository.getCurrentProduct(id);
   }
 

@@ -6,9 +6,9 @@ import '../../../../core/error/exception.dart';
 import '../models/product_model.dart';
 
 abstract class ProductLocalDataSource {
-  Future cacheProducts(List<ProductModel> products);
+  Future<bool> cacheProducts(List<ProductModel> products);
   Future getAllProducts();
-
+  Future getCurrentProduct(String id);
 }
 
 
@@ -18,9 +18,9 @@ class ProductLocalDataSourceImpl extends ProductLocalDataSource {
 
   
   @override
-  Future<bool> cacheProducts(List<ProductModel> products) {
+  Future<bool> cacheProducts(List<ProductModel> products)async {
     /// Encode all current products and set them in local storage
-    return sharedPreferences.setString('PRODUCTS', jsonEncode(products));
+    return await sharedPreferences.setString('PRODUCTS', jsonEncode(products));
   }
 
   @override
@@ -34,6 +34,19 @@ class ProductLocalDataSourceImpl extends ProductLocalDataSource {
       return products;
     } else {
       throw CacheException();
+    }
+  }
+  
+  @override
+  Future getCurrentProduct(String id)async {
+    List<ProductModel> products = await this.getAllProducts();
+    if(products.isEmpty) {
+      return null;
+    }
+    for (var item in products) {
+      if(item.id == id) {
+        return item;
+      }
     }
   }
 }

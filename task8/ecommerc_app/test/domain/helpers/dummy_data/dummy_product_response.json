@@ -1,7 +1,7 @@
 {
-    "id":1,
-    "name":"Test Product",
-    "description":"these is test description",
-    "price":100,
-    "imageUrl":"http://test.com/test.jpg"
+    "id": "66bc7fd34a74f6cc9351de67",
+    "name": "shoe",
+    "description": "testwith image",
+    "price": 11,
+    "imageUrl": "https://res.cloudinary.com/g5-mobile-track/image/upload/v1723629523/images/kwocoxxfwbllfi1lqci1.png"
 }

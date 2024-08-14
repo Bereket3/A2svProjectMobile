@@ -19,7 +19,7 @@ void main() {
   });
 
   final testProduct = const ProductEntity(
-    id: 1,
+    id:  '66bc7fd34a74f6cc9351de67',
     name: 'Test Product',
     description: 'This is a test product',
     price: 100,

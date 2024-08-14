@@ -15,7 +15,7 @@ void main() {
     deleteUseCase = DeleteProductUseCase(mockProductRepository);
   });
 
-  const testProductId = 1;
+  const testProductId = '66bc7fd34a74f6cc9351de67';
 
   test('should delete product from the repository', () async {
     // Arrange
