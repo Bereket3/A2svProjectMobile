@@ -3,5 +3,5 @@
     "name":"Test Product",
     "description":"these is test description",
     "price":100,
-    "imageUrl":"http://localhost:5555/test.jpg"
+    "imageUrl":"http://test.com/test.jpg"
 }

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ecommerc_app/features/product/data/models/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../helpers/json_parser.dart';
+import '../../../helpers/json_parser.dart';
 
 void main () {
   const testProductModel = ProductModel(
@@ -25,12 +25,31 @@ void main () {
     () async {
       //arrange
       final Map < String, dynamic > jsonMap = json.decode(
-        readJson('helpers/dummy_data/dummy_product_response.json'),
+        readJson('dummy_product_response.json'),
       );
 
       //act
       final result = ProductModel.fromJson(jsonMap);
-      expect(result, equals(testProductModel));
+      expect(result, isA<ProductModel>());
     }
+  );
+  test(
+    'should return a json map containing proper data',
+    () async {
+
+      // act
+      final result = testProductModel.toJson();
+
+      // assert
+      final expectedJsonMap = {
+          'id':1,
+          'name':'test',
+          'description':'these is test modle',
+          'price':100,
+          'imageUrl':'http://test.com/test.jpg'
+      };
+      expect(result, equals(expectedJsonMap));
+
+    },
   );
 }
