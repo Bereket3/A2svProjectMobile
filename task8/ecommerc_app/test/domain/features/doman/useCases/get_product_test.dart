@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:ecommerc_app/core/error/failure.dart';
-// import 'package:ecommerc_app/domain/repositories/product_repositories.dart';
-import 'package:ecommerc_app/domain/usecases/get_current_product.dart';
 import 'package:ecommerc_app/features/product/domain/entities/product.dart';
+// import 'package:ecommerc_app/domain/repositories/product_repositories.dart';
+import 'package:ecommerc_app/features/product/domain/useCases/get_current_product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../../helpers/test_helper.mocks.dart';
 
 // Create a Mock class for ProductRepository
 // class MockProductRepository extends Mock implements ProductRepository {}

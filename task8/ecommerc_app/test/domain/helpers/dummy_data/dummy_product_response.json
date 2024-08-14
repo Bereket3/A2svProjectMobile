@@ -1,0 +1,7 @@
+{
+    "id":1,
+    "name":"Test Product",
+    "description":"these is test description",
+    "price":100,
+    "imageUrl":"http://localhost:5555/test.jpg"
+}
