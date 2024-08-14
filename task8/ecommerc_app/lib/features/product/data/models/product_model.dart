@@ -1,5 +1,18 @@
 import '../../domain/entities/product.dart';
 
+extension ProductMapper on ProductEntity {
+  ProductModel toProductModel() {
+    return ProductModel(
+      id: id,
+      name: name,
+      description: description,
+      price: price,
+      imageUrl: imageUrl,
+    );
+  }
+}
+
+
 class ProductModel extends ProductEntity {
   const ProductModel({
       required int id,
@@ -22,4 +35,24 @@ class ProductModel extends ProductEntity {
     price: json['price'],
     imageUrl: json['imageUrl'],
   );
+
+  Map < String, dynamic > toJson() => {
+    'id': id,
+    'name': name,
+    'description': description,
+    'price': price,
+    'imageUrl' :imageUrl,
+  };
+
+  ProductEntity toProductEntity() => ProductEntity(
+    id: id,
+    name: name,
+    description: description,
+    price: price,
+    imageUrl: imageUrl,
+  );
+
+  static List<ProductEntity> toProductListEntity(List<ProductModel> model) {
+    return model.map((product) => product.toProductEntity()).toList();
+  }
 }
