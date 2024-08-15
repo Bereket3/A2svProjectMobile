@@ -26,7 +26,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     try {
     id = id.toString();
     } catch (e) {
-      throw new Error();
+      throw new Exception('could not convert to string');
     }
     final response = await client.get(Uri.parse(Urls.getProductId(id)));
 

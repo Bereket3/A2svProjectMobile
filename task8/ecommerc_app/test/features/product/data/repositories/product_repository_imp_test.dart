@@ -4,11 +4,10 @@ import 'package:ecommerc_app/core/error/exception.dart';
 import 'package:ecommerc_app/core/error/failure.dart';
 import 'package:ecommerc_app/features/product/data/models/product_model.dart';
 import 'package:ecommerc_app/features/product/data/repositories/product_repository_imp.dart';
-import 'package:ecommerc_app/features/product/domain/entities/product.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late MockProductRemoteDataSource mockProductRemoteDatasource;
@@ -253,14 +252,6 @@ void main() {
   
   group('deleteProduct', (){
     const id = '1';
-
-    const product = ProductModel(
-      id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      price: 100,
-      imageUrl: 'image1.jpg',
-    );
 
     runOnlineTests(() {
       test('should should delete the data when remote data call is success', () async {
