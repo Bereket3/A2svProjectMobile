@@ -46,14 +46,6 @@ void main() {
     imageUrl: 'https://example.com/product.jpg',
   );
 
-  final testProduct = const ProductModel(
-    id: '123',
-    name: 'Test Product',
-    description: 'This is a test product',
-    price: 19,
-    imageUrl: 'https://example.com/product.jpg',
-  );
-
 
   group('ProductBloc Tests', () {
     blocTest<ProductBloc, ProductState>(
