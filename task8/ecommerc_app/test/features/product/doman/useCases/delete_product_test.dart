@@ -4,7 +4,7 @@ import 'package:ecommerc_app/features/product/domain/useCases/delete_product.dar
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../helpers/test_helper.mocks.dart';
+import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
   late DeleteProductUseCase deleteUseCase;

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ecommerc_app/features/product/data/models/product_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../helpers/json_parser.dart';
+import '../../../../helpers/json_parser.dart';
 
 void main () {
   const testProductModel = ProductModel(
