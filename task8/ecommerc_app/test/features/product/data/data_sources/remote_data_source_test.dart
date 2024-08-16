@@ -17,27 +17,27 @@ void main () {
   setUp(() {
     mockHttpClient = MockHttpClient();
     remoteDataSource = ProductRemoteDataSourceImpl(client: mockHttpClient);
-  });group(
-    'get product',
-    () {
+    });group(
+      'get product',
+      ()   {
       test(
-        'should return product model when 200 status code', 
-        () async {
+          'should return product model when 200 status code', 
+          () async {
           when(
-            mockHttpClient.get(
-              Uri.parse(Urls.getProductId(id))
-            )
-          ).thenAnswer(
-            (_) async => http.Response(
-              readJson('dummy_product_response.json'),
-              200
-            )
-          );
+              mockHttpClient.get(
+                Uri.parse(Urls.getProductId(id))
+                )
+              ).thenAnswer(
+                (_) async => http.Response(
+                  readJson('dummy_product_response.json'),
+                  200
+                  )
+                );
           final result = await remoteDataSource.getCurrentProduct(id);
           expect(result, isA<ProductModel>());
-        }
-      );
-    }
-  );
+          }
+          );
+      }
+    );
 
 }

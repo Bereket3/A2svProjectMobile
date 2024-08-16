@@ -1,7 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerc_app/core/error/failure.dart';
-import 'package:ecommerc_app/features/product/data/models/product_model.dart';
 import 'package:ecommerc_app/features/product/domain/entities/product.dart';
 import 'package:ecommerc_app/features/product/domain/useCases/create_product.dart';
 import 'package:ecommerc_app/features/product/domain/useCases/delete_product.dart';
@@ -30,23 +29,16 @@ void main() {
     createProductUseCase = CreateProductUseCase(mockProductRepository);
     deleteProductUseCase = DeleteProductUseCase(mockProductRepository);
     updateProductUseCase = UpdateProductUseCase(mockProductRepository);
+
     productBloc = ProductBloc(
-      getAllProductsUseCase,
-      getCurrentProductUseCase,
-      createProductUseCase,
-      deleteProductUseCase,
-      updateProductUseCase,
+      getProductsUsecase: getAllProductsUseCase,
+      getSingleProductUsecase: getCurrentProductUseCase,
+      createProductUseCase: createProductUseCase,
+      deleteProductUsecase:  deleteProductUseCase,
+      updateProductUsecase :updateProductUseCase,
     );
   });
   final testProductModel = const ProductEntity(
-    id: '123',
-    name: 'Test Product',
-    description: 'This is a test product',
-    price: 19,
-    imageUrl: 'https://example.com/product.jpg',
-  );
-
-  final testProduct = const ProductModel(
     id: '123',
     name: 'Test Product',
     description: 'This is a test product',

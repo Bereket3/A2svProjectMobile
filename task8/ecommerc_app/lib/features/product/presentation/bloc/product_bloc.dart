@@ -19,13 +19,13 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   final DeleteProductUseCase deleteProductUsecase;
   final UpdateProductUseCase updateProductUsecase;
   
-  ProductBloc(
-    this.getProductsUsecase, 
-    this.getSingleProductUsecase, 
-    this.createProductUseCase, 
-    this.deleteProductUsecase, 
-    this.updateProductUsecase
-  ) : super(ProductInitial()) {
+  ProductBloc({
+    required this.getProductsUsecase, 
+    required this.getSingleProductUsecase, 
+    required this.createProductUseCase, 
+    required this.deleteProductUsecase, 
+    required this.updateProductUsecase
+  }) : super(ProductInitial()) {
 
     on<LoadAllProductEvent>((event, emit) async {
       emit(ProductInitial());
