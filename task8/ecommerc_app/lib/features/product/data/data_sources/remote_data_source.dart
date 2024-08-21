@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/error/exception.dart';
+import '../../domain/entities/product.dart';
 import '../models/product_model.dart';
 
 
@@ -25,13 +27,13 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   Future < ProductModel > getCurrentProduct(dynamic id) async {
     try {
     id = id.toString();
+
     } catch (e) {
       throw new Exception('could not convert to string');
     }
     final response = await client.get(Uri.parse(Urls.getProductId(id)));
-
-     if (response.statusCode == 200) {
-      return ProductModel.fromJson(json.decode(response.body));
+    if (response.statusCode == 200) {
+      return ProductModel.fromJson(json.decode(response.body)['data']);
     } 
     throw ServerException();
 
@@ -41,10 +43,9 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   Future<List<ProductModel>> getProduct() async {
     final response = await client.get(Uri.parse(Urls.getProducts));
 
-    List<dynamic> result = jsonDecode(response.body)['data'];
-    final products = result.map((product) => ProductModel.fromJson(product)).toList();
-
     if (response.statusCode == 200) {
+      List<dynamic> result = await jsonDecode(response.body)['data'];
+      final products = await result.map((product) => ProductModel.fromJson(product)).toList();
       return products;
     }
     throw ServerException();
@@ -53,15 +54,41 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-    final response = await client.put(
-        Uri.parse(Urls.updateProductId(product.id)),
-        body: product.toJson());
+    // final response = await client.put(
+    //   Uri.parse(Urls.getProductId(product.id)),
+    //   body: jsonEncode({
+    //     'name': product.name,
+    //     'description': product.description,
+    //     'price': product.price,
+    //   }),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // );
+    // if (response.statusCode == 200) {
+    //   return ProductModel.fromJson(json.decode(response.body)['data']);
+    // } else {
+    //   throw ServerException();
+    // }
 
-    if (response.statusCode == 200) {
-      return ProductModel.fromJson(json.decode(response.body)['data']);
-    } 
-    throw ServerException();
+    var request = http.MultipartRequest('put', Uri.parse(Urls.getProductId(product.id)));
+
+    request.fields['name'] = product.name;
+    request.fields['price'] = product.price.toString();
+    request.fields['description'] = product.description;
     
+    var pic = await http.MultipartFile.fromPath('image', product.imageUrl, contentType: MediaType('image', 'jpg'));
+    request.files.add(pic);
+    var response = await request.send();
+    print(response.statusCode); print(product.id);
+    if (response.statusCode == 200 || response.statusCode == 204){
+      var jsonResult = await http.Response.fromStream(response);
+      var product = json.decode(jsonResult.body)['data'];
+      
+      return ProductModel.fromJson(product);
+    } else {
+      throw ServerException();
+    }
   }
   
   @override
@@ -71,8 +98,7 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
     } catch (e) {
       throw new Error();
     }
-    final response = await client.delete(Uri.parse(Urls.deleteProductId(id)));
-
+    final response = await client.delete(Uri.parse(Urls.getProductId(id)));
     if (response.statusCode == 200) {
       return true;
     } 
@@ -81,15 +107,26 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
   }
   
   @override
-  Future createProduct(ProductModel product) async {
-    final response = await client.post(
-      Uri.parse(Urls.addProduct),
-      body: product.toJson(),
-    );
-    if(response == 200){
-      return ProductModel.fromJson(jsonDecode(response.body)['data']);
+  Future<ProductModel> createProduct(ProductEntity product) async {
+    var request = http.MultipartRequest('POST', Uri.parse(Urls.getProducts));
+
+    request.fields['name'] = product.name;
+    request.fields['price'] = product.price.toString();
+    request.fields['description'] = product.description;
+    
+    var pic = await http.MultipartFile.fromPath('image', product.imageUrl, contentType: MediaType('image', 'jpg'));
+    request.files.add(pic);
+    // print(pic.filename);
+    var response = await request.send();
+
+    if (response.statusCode == 201){
+      var jsonResult = await http.Response.fromStream(response);
+      var product = json.decode(jsonResult.body)['data'];
+      
+      return ProductModel.fromJson(product);
+    } else {
+      throw ServerException();
     }
-    throw ServerException();
   }
   
 }
