@@ -18,7 +18,7 @@ class ProductModel extends ProductEntity {
       required String id,
       required String name,
       required String description,
-      required int price,
+      required double price,
       required String imageUrl,
   }) : super(
     id: id,
@@ -32,7 +32,7 @@ class ProductModel extends ProductEntity {
     id: json['id'],
     name: json['name'],
     description: json['description'],
-    price: json['price'],
+    price: json['price'].toDouble(),
     imageUrl: json['imageUrl'],
   );
 

@@ -9,7 +9,10 @@ sealed class ProductState extends Equatable {
 
 final class ProductInitial extends ProductState {}
 
-final class LoadingState extends ProductState {}
+final class LoadingState extends ProductState {
+  @override
+  List<Object> get props => [];
+}
 
 final class LoadedSingleProductState extends  ProductState {
 

@@ -18,8 +18,7 @@ Future<void> init() async {
   //feature: Crud operations on product
   //bloc
 
-  sl.registerFactory(
-    () => ProductBloc(
+  sl.registerFactory(() => ProductBloc(
       getProductsUsecase: sl(), 
       getSingleProductUsecase: sl(), 
       createProductUseCase: sl(), 
@@ -53,7 +52,7 @@ Future<void> init() async {
   );
 
   //!Core
-  sl.registerLazySingleton(() => NetworkInfoImpl());
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl());
 
   //external
 

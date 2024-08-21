@@ -7,8 +7,7 @@ sealed class ProductEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadAllProductEvent extends ProductEvent {
-}
+class LoadAllProductEvent extends ProductEvent {}
 
 class LoadSingleProductEvent extends ProductEvent {
   final String id;
