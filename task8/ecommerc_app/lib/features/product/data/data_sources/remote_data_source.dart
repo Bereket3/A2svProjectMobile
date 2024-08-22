@@ -54,41 +54,41 @@ class ProductRemoteDataSourceImpl extends ProductRemoteDataSource {
 
   @override
   Future<ProductModel> updateProduct(ProductModel product) async {
-    // final response = await client.put(
-    //   Uri.parse(Urls.getProductId(product.id)),
-    //   body: jsonEncode({
-    //     'name': product.name,
-    //     'description': product.description,
-    //     'price': product.price,
-    //   }),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // );
-    // if (response.statusCode == 200) {
-    //   return ProductModel.fromJson(json.decode(response.body)['data']);
-    // } else {
-    //   throw ServerException();
-    // }
-
-    var request = http.MultipartRequest('put', Uri.parse(Urls.getProductId(product.id)));
-
-    request.fields['name'] = product.name;
-    request.fields['price'] = product.price.toString();
-    request.fields['description'] = product.description;
-    
-    var pic = await http.MultipartFile.fromPath('image', product.imageUrl, contentType: MediaType('image', 'jpg'));
-    request.files.add(pic);
-    var response = await request.send();
-    print(response.statusCode); print(product.id);
-    if (response.statusCode == 200 || response.statusCode == 204){
-      var jsonResult = await http.Response.fromStream(response);
-      var product = json.decode(jsonResult.body)['data'];
-      
-      return ProductModel.fromJson(product);
+    final response = await client.put(
+      Uri.parse(Urls.getProductId(product.id)),
+      body: jsonEncode({
+        'name': product.name,
+        'description': product.description,
+        'price': product.price,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      return ProductModel.fromJson(json.decode(response.body)['data']);
     } else {
       throw ServerException();
     }
+
+    // var request = http.MultipartRequest('put', Uri.parse(Urls.getProductId(product.id)));
+
+    // request.fields['name'] = product.name;
+    // request.fields['price'] = product.price.toString();
+    // request.fields['description'] = product.description;
+    
+    // var pic = await http.MultipartFile.fromPath('image', product.imageUrl, contentType: MediaType('image', 'jpg'));
+    // request.files.add(pic);
+    // var response = await request.send();
+    // print(response.statusCode); print(product.id);
+    // if (response.statusCode == 200 || response.statusCode == 204){
+    //   var jsonResult = await http.Response.fromStream(response);
+    //   var product = json.decode(jsonResult.body)['data'];
+      
+    //   return ProductModel.fromJson(product);
+    // } else {
+    //   throw ServerException();
+    // }
   }
   
   @override
